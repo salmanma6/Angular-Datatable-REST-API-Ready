@@ -2,6 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.8.
 
+### Live:https://salmanma6.github.io/Angular-Datatable-REST-API-Ready/
 ## Features
   - #### Reusable component
   
@@ -14,7 +15,7 @@ export const environment = {
   inMemoryDatabase:true
 };
 ``` 
-&nbsp;&nbsp; Configure REST API endpoints  in options
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Configure REST API endpoints  in options
 ```
 {
    baseApiUrl: baseUrlhere,
