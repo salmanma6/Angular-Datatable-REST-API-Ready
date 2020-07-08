@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { DecimalPipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'data-table',
   styleUrls: ['./datatable.component.scss'],
@@ -24,21 +25,26 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterViewInit {
   data: any;
   currentOperation: any;
   templateDataObject: any;
+  showLoader=false;
   constructor(private dataTableService: DataTableService, private modalService: NgbModal
     , private decimalPipe: DecimalPipe, private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    const scope=this;
+    this.showLoader=true;
     this.primaryColumns = [...this.customDtOptions.dataTableOptions.columns]
     const columnDefs = this.customDtOptions.dataTableOptions.columns.map((col, index) =>
       ({
         targets: index,
+        className: "dt-center",
         render: (cellData, type, row) =>
           col.format == "text" ? cellData :
-            col.format == "number" && !isNaN(cellData)? this.decimalPipe.transform(cellData, '2.') :
-              col.format == "amount" && !isNaN(cellData)? "$" + this.decimalPipe.transform(cellData / 1000, '2.') + "K" : cellData
+            col.format == "number" && !isNaN(cellData) ? this.decimalPipe.transform(cellData, '2.') :
+              col.format == "amount" && !isNaN(cellData) ? "$" + this.decimalPipe.transform(cellData / 1000, '2.') + "K" : cellData
       }))
     columnDefs.push({
       targets: columnDefs.length,
+      className: "dt-center",
       render: (data, type, row) => `<div class="d-flex justify-content-around">
                   <button type="button" id="editRecordBtn" class="btn btn-warning">Edit</button>
                   <button type="button" id="deleteRecordBtn" class="btn btn-danger">Delete</button>
@@ -51,7 +57,14 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterViewInit {
     });
     this.customDtOptions.dataTableOptions.columns.push({ "title": "Actions", data: null });
     this.dtOptions = {
-      bAutoWidth: true,
+      dom: 'lfr<"toolbar">tip',
+      lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+      responsive: true,
+      autoWidth: true,
+      initComplete: function () {
+        $("div.toolbar").html(`<button type="button" id="addRecordBtn" class="btn btn-primary float-right px-2 py-1  mr-3" >Add New</button>`);
+        $("div.toolbar").find("#addRecordBtn").on("click", () =>scope.openAddEditModal(-1));
+      },
       ...this.customDtOptions.dataTableOptions,
       columnDefs: columnDefs
     }
@@ -81,10 +94,11 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterViewInit {
       .catch(err => "")
   }
   onAddEditFormSubmit(formValue) {
+    this.showLoader=true;
     this.modalService.dismissAll();
     const prop = this.customDtOptions.param;
     const paramValue = this.currentRecord[prop];
-    this.customDtOptions.generateParamOnAdd && this.currentOperation == "Add" ?this.currentRecord[prop] = new Date().getTime().toString() : ""
+    this.customDtOptions.generateParamOnAdd && this.currentOperation == "Add" ? this.currentRecord[prop] = new Date().getTime().toString() : ""
     const dataToSend = { ...this.currentRecord, ...formValue }
     this.currentOperation == "Add" ?
       this.dataTableService.createData(this.customDtOptions.add, dataToSend).subscribe((res) => {
@@ -99,6 +113,7 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterViewInit {
         this.toastr.error(err.message, 'Error Adding Record');
         this.currentRecord = null;
         this.currentOperation = "";
+        this.showLoader=false;
       })
       :
       this.dataTableService.editData(this.customDtOptions.edit, paramValue, dataToSend).subscribe((res) => {
@@ -113,10 +128,12 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterViewInit {
         this.toastr.error(err.message, 'Error Editing Record');
         this.currentRecord = null;
         this.currentOperation = "";
+        this.showLoader=false;
       })
   }
 
   removeRecord(iRow) {
+    this.showLoader=true;
     this.currentRecord = this.data[iRow];
     const paramValue = this.currentRecord[this.customDtOptions.param];
     this.dataTableService.deleteData(this.customDtOptions.delete, paramValue).subscribe((res) => {
@@ -132,6 +149,7 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterViewInit {
       this.toastr.error(err.message, 'Error Deleting Record');
       this.currentRecord = null;
       this.currentOperation = "";
+      this.showLoader=false;
     })
 
   }
@@ -140,6 +158,7 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterViewInit {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       dtInstance.destroy();
       this.dtTrigger.next();
+      this.showLoader=false;
     });
   }
 
