@@ -30,6 +30,7 @@ export class DataTableComponent implements OnDestroy, OnInit, AfterViewInit {
     , private decimalPipe: DecimalPipe, private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    //welcome
     const scope=this;
     this.showLoader=true;
     this.primaryColumns = [...this.customDtOptions.dataTableOptions.columns]
