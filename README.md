@@ -60,7 +60,7 @@ columns: [
     In order to execute something on respective events, pass property `eventCallbacks` with following json in the options which passed to `data-table`
  ``` json 
     {
-    ..other options
+    ...other options
      eventCallbacks: {
         edited: function () {
           console.log("Record Edited")
