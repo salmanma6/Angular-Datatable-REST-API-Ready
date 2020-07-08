@@ -6,8 +6,15 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
   - #### Reusable component
   
     Use selector `<data-table>` tag in any component
-  - #### Compatible with any REST API 
-     Configure REST API endpoints  in options
+  - #### Compatible with In Memory Web API and any REST API
+    In order to use In Memory Web API set `inMemoryDatabase` to `true`  in both `environment.ts` and  `environment.prod.ts` and to use any other REST API set `inMemoryDatabase` to `false` 
+``` typescript
+export const environment = {
+  production: false,
+  inMemoryDatabase:true
+};
+``` 
+<tr> <tr> Configure REST API endpoints  in options
 ```
 {
    baseApiUrl: baseUrlhere,
