@@ -8,28 +8,33 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
     Use selector `<data-table>` tag in any component
   - ##### Compatible with any REST API 
      Configure REST API endpoints  in options
-    `{`
-         ` baseApiUrl: baseUrlhere,`
-          `get: route to get records,`
-          `edit: route to edit record,`
-          `add: route to add record,`
-          `delete: route to delete record,`
-          `param: param(Ex:id) to pass in route,`
-           `generateParamOnAdd:where to create new param(Ex:id) on every add(boolean),`
-         `... other options`
-    `}`
+```
+    {
+          baseApiUrl: baseUrlhere,
+          get: route to get records,
+          edit: route to edit record,
+          add: route to add record,
+          delete: route to delete record,
+          param: param(Ex:id) to pass in route,
+          generateParamOnAdd:whether to create
+                            new param(Ex:id) on every add(boolean),
+         ... other options
+    }
+```
+    //Example
 
-    Example
-              `{`
-                 ` baseApiUrl: "http://localhost:5500/api",`
-                  `get: "employees",`
-                  `edit: "employees/:id",`
-                   `add: "employees",`
-                   `delete: "employees/:id",`
-                   `param:"id",`
-                    `generateParamOnAdd:true,`
-               }`
-  - ##### Basic CRUD Operations
+    {
+                   baseApiUrl: "http://localhost:5500/api",
+                   get: "employees",
+                   edit: "employees/:id",
+                   add: "employees",
+                   delete: "employees/:id",
+                   param:"id",
+                   generateParamOnAdd:true,
+    }
+  
+    
+ - ##### Basic CRUD Operations
     Add a record using Add button left to search bar.
    Edit and delete a record using buttons in Actions column of datatable
   - ##### Formatting the data  
