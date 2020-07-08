@@ -15,7 +15,7 @@ export const environment = {
   inMemoryDatabase:true
 };
 ``` 
-&nbsp;&nbsp;&nbsp Configure REST API endpoints  in options
+&nbsp;&nbsp;&nbsp; Configure REST API endpoints  in options
 ```
 {
    baseApiUrl: baseUrlhere,
