@@ -20,10 +20,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
                             new param(Ex:id) on every add(boolean),
          ... other options
     }
-```
-    //Example
 
-    {
+//Example
+
+{
                    baseApiUrl: "http://localhost:5500/api",
                    get: "employees",
                    edit: "employees/:id",
@@ -31,8 +31,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
                    delete: "employees/:id",
                    param:"id",
                    generateParamOnAdd:true,
-    }
-  
+}
+``` 
     
  - ##### Basic CRUD Operations
     Add a record using Add button left to search bar.
@@ -59,7 +59,7 @@ columns: [
   
     In order to execute something on respective events, pass property `eventCallbacks` with following json in the options which passed to `data-table`
  ```  
-    {
+{
     ...other options
      eventCallbacks: {
         edited: function () {
@@ -72,7 +72,7 @@ columns: [
           console.log("Record Deleted")
         },
       }
-      }
+}
 ```
 
 ## Development server
