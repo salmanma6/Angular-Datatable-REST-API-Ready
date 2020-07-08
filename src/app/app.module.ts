@@ -1,14 +1,33 @@
+import { DataTableComponent } from './datatable/datatable.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
+import { DataTablesModule } from 'angular-datatables';
+import { HttpClientModule } from '@angular/common/http';
+import { EmployeesComponent } from './employees/employees.component';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './services/in-memory.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from 'src/environments/environment.prod';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DataTableComponent,
+    EmployeesComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    DataTablesModule,
+    HttpClientModule,
+    NgbModalModule,
+    FormsModule,
+    environment.inMemoryDatabase?InMemoryWebApiModule.forRoot(InMemoryDataService):[],
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
