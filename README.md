@@ -75,7 +75,7 @@ columns: [
 }
 ```
 
-## How to use the data-table component in any component?
+## How to use the `data-table` component
 
 ##### Create a component using
 ``` bash
