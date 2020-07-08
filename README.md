@@ -9,28 +9,28 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
   - ##### Compatible with any REST API 
      Configure REST API endpoints  in options
 ```
-    {
-          baseApiUrl: baseUrlhere,
-          get: route to get records,
-          edit: route to edit record,
-          add: route to add record,
-          delete: route to delete record,
-          param: param(Ex:id) to pass in route,
-          generateParamOnAdd:whether to create
+{
+   baseApiUrl: baseUrlhere,
+   get: route to get records,
+   edit: route to edit record,
+   add: route to add record,
+   delete: route to delete record,
+   param: param(Ex:id) to pass in route,
+   generateParamOnAdd:whether to create
                             new param(Ex:id) on every add(boolean),
-         ... other options
-    }
+     ... other options
+}
 
 //Example
 
 {
-                   baseApiUrl: "http://localhost:5500/api",
-                   get: "employees",
-                   edit: "employees/:id",
-                   add: "employees",
-                   delete: "employees/:id",
-                   param:"id",
-                   generateParamOnAdd:true,
+    baseApiUrl: "http://localhost:5500/api",
+    get: "employees",
+    edit: "employees/:id",
+    add: "employees",
+    delete: "employees/:id",
+    param:"id",
+    generateParamOnAdd:true,
 }
 ``` 
     
