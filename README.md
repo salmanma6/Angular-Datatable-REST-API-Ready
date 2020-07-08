@@ -3,10 +3,10 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.8.
 
 ## Features
-  - ##### Reusable component
+  - #### Reusable component
   
     Use selector `<data-table>` tag in any component
-  - ##### Compatible with any REST API 
+  - #### Compatible with any REST API 
      Configure REST API endpoints  in options
 ```
 {
@@ -34,10 +34,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 }
 ``` 
     
- - ##### Basic CRUD Operations
+ - #### Basic CRUD Operations
     Add a record using Add button left to search bar.
    Edit and delete a record using buttons in Actions column of datatable
-  - ##### Formatting the data  
+  - #### Formatting the data  
     Currently supports two formats `amount ` and `number`      
 Format the data by passing property `format:"text"` in column object of columns array
 Setting format to amount `3000` will convert  to `$3.00K`
@@ -55,7 +55,7 @@ columns: [
 }        
 ```        
 
-  - ##### Supports Events for ADD,EDIT and DELETE
+  - #### Supports Event callbacks  for ADD,EDIT and DELETE
   
     In order to execute something on respective events, pass property `eventCallbacks` with following json in the options which passed to `data-table`
  ```  
