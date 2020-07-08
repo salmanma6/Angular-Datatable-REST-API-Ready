@@ -75,6 +75,62 @@ columns: [
 }
 ```
 
+## How to use the data-table component in any component?
+
+##### Create a component using
+``` bash
+ng g c componentName
+```
+
+##### In Ts ,Create a property with any name (Ex:`customDtOptions`) and in `ngOnInit` initialize it as follows.
+``` typescript
+
+import { Component, OnInit, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-employees',
+  templateUrl: './employees.component.html',
+  styleUrls: ['./employees.component.scss']
+})
+export class EmployeesComponent implements OnInit {
+  customDtOptions: any;
+  constructor() { }
+  ngOnInit(): void {
+    this.customDtOptions = {
+      baseApiUrl: "http://localhost:5500/api",
+      get: "employees",
+      edit: "employees/:id",
+      add: "employees",
+      delete: "employees/:id",
+      param:"id",
+      generateParamOnAdd:true,
+      dataTableOptions: {
+        columns: [
+          { title: "Name", data: "employee_name", format: "text" },
+          { title: "Age", data: "employee_age", format: "text" },
+          { title: "Salary", data: "employee_salary", format: "amount"}
+        ]
+      },
+      eventCallbacks: {
+        edited: function () {
+          console.log("Employee Edited")
+        },
+        added: function () {
+          console.log("Employee Added")
+        },
+        deleted: function () {
+          console.log("Employee Deleted")
+        },
+      }
+    };
+  }
+}
+```
+##### In template(HTML) pass the options to customDtOptions property of `data-table` component
+``` html
+   <data-table  [customDtOptions]="customDtOptions" ></data-table>
+```
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
